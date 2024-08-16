@@ -1,0 +1,85 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Int!
+  email: String!
+}
+
+type Auth {
+  """jwt access token"""
+  accessToken: String!
+
+  """user"""
+  user: User!
+}
+
+type MessageResponse {
+  """Response message"""
+  message: String!
+}
+
+type Project {
+  id: Int!
+  owner: String!
+  name: String!
+  url: String!
+  stars: Int!
+  forks: Int!
+  issues: Int!
+  createdAt: BigInt!
+}
+
+"""
+The `BigInt` scalar type represents non-fractional signed whole numeric values.
+"""
+scalar BigInt
+
+type Query {
+  """Refresh access token"""
+  refresh: Auth!
+
+  """Sign out user"""
+  logout: MessageResponse!
+
+  """Get all user projects"""
+  getAllUserProjects: [Project!]!
+}
+
+type Mutation {
+  """Sing in user"""
+  login(loginInput: LoginInput!): Auth!
+
+  """Sign up new user"""
+  createUser(createUserInput: CreateUserInput!): Auth!
+
+  """Add project"""
+  addProject(projectInput: ProjectInput!): Project!
+
+  """Update project via checking github repository"""
+  updateProject(projectInput: ProjectInput!, id: Int!): Project!
+
+  """Remove project"""
+  removeProject(projectId: Int!): Project!
+}
+
+input LoginInput {
+  """user email"""
+  email: String!
+
+  """user password"""
+  password: String!
+}
+
+input CreateUserInput {
+  email: String!
+
+  """Password min length has to be 8 signs"""
+  password: String!
+}
+
+input ProjectInput {
+  """Repository path in format {owner}/{repo name} e.g. facebook/react"""
+  repoName: String!
+}
