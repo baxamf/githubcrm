@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:latest
 
 WORKDIR /app
 
@@ -9,6 +9,8 @@ RUN npm install
 COPY prisma ./prisma/
 
 COPY . .
+
+RUN npx prisma generate
 
 RUN npm run build
 
