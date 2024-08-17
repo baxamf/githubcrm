@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/modules/prisma/prisma.service';
 import { ProjectInput } from '../dto/project.input';
 import { ProjectsService } from '../projects.service';
-import { CreateProjectDTO } from '../dto/create-project.dto';
 import { Project } from '../entities/project.entity';
 import { IUseCase } from 'src/common/interfaces/use-case';
+import { UpdateProjectDTO } from '../dto/update-project.dto';
 
 export class UpdateProjectCommand {
   projectInput: ProjectInput;
@@ -28,7 +28,7 @@ export class UpdateProjectUseCase
     const gitHubData =
       await this.projectsService.getGitHubRepoInfo(projectInput);
 
-    const data = new CreateProjectDTO(gitHubData);
+    const data = new UpdateProjectDTO(gitHubData);
 
     return this.prisma.project.update({ where: { id }, data });
   }

@@ -11,7 +11,6 @@ import { removeTypenameFromVariables } from "@apollo/client/link/remove-typename
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import { StorageService } from "../store/StorageService";
-// import { gql } from "./__generated__";
 
 export const REFRESH = gql(`
   query Refresh {
@@ -45,7 +44,7 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
             apolloClient.clearStore();
 
             StorageService.removeAccessToken();
-            // window.location.href = "/login";
+
             return;
           }
 
