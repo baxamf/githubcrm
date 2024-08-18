@@ -35,7 +35,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
 
   async validate(payload: JwtUserPayload) {
     const user = await this.prisma.user.findUniqueOrThrow({
-      where: { id: payload.id },
+      where: { email: payload.email },
     });
 
     const cacheKey = jwtRefreshTokenCacheKey(payload.id);

@@ -28,6 +28,6 @@ export class CreateProjectDTO {
 
     this.issues = gitHubRepoInfo.open_issues_count;
 
-    this.createdAt = Date.now();
+    this.createdAt = +new Date(gitHubRepoInfo.created_at);
   }
 }
